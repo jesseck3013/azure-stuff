@@ -35,6 +35,6 @@ function Decrypt {
     
     # Encrypt the bytes 
     $decryptedBytes = $rsa.Decrypt($bytesToDecrypt, [System.Security.Cryptography.RSAEncryptionPadding]::Pkcs1)
-    $decryptedMessage = [System.Text.Encoding]::UTF8.GetString($decryptedBytes)
-    Write-Output $decryptedMessage
+    $decryptedString = [System.Text.Encoding]::UTF8.GetString($decryptedBytes)
+    Write-Output $decryptedString
 }
