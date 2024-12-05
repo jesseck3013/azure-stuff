@@ -9,13 +9,6 @@ $workflowName = ""
 $runId = ""
 
 function Get-History {
-	 param (
-	 	$subscriptionId,
-		$resourceGroupName,
-		$logicAppName,
-		$workflowName,
-		$runId
-	 )
 	 $uri = "https://management.azure.com/subscriptions/${subscriptionId}/resourceGroups/${resourceGroupName}/providers/Microsoft.Web/sites/${logicAppName}/hostruntime/runtime/webhooks/workflow/api/management/workflows/${workflowName}/runs/${runId}?api-version=2024-04-01"
 
 	 $resp = Invoke-AzRestMethod -Method Get -Uri $uri
@@ -37,6 +30,7 @@ function Get-Workflow-Definition {
 	 Write-Output $definition
 }
 
+Set-AzContext -Subscription $subscriptionId
 $versionId = Get-History
 $workflowDefinition = Get-Workflow-Definition -versionId $versionId
 Set-Content -Value $workflowDefinition -Path ./workflow.json
